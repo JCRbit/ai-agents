@@ -10,9 +10,11 @@ El sitio es bilingüe: el botón **English / Español** del encabezado cambia el
 
 ## Demo en vivo
 
-La web está preparada para publicarse como sitio estático. Cuando la despliegues en un proveedor de alojamiento, añade aquí la URL pública.
+La aplicación está desplegada y disponible públicamente mediante Cloudflare Workers.
 
-Por ejemplo, puedes usar Netlify o Cloudflare Pages sin desplegar desde GitHub. Configura `site/` como directorio publicable si esa carpeta contiene `index.html` y todos los recursos que necesita.
+**URL:** [https://ai-agents.metamask-one.workers.dev/](https://ai-agents.metamask-one.workers.dev/)
+
+El sitio es estático y no requiere un paso de compilación para ejecutarse.
 
 ## Contenido del tutorial
 
@@ -40,7 +42,6 @@ El guion detallado de cada módulo (teoría completa, texto de las demos y enunc
 │   ├── pizza_agent_lab.ipynb      Notebook de práctica
 │   └── solutions/
 │       └── pizza_agent_lab_solved.ipynb
-├── qa/                            Tests de comportamiento y QA visual
 ├── site/                          Sitio estático que se publica
 │   ├── index.html                 Portada: hero + ruta de aprendizaje
 │   ├── modules/
@@ -111,6 +112,7 @@ node qa/test-module-1.js && node qa/test-module-2.js \
 
 # QA visual/responsive (requiere Playwright y el sitio servido)
 npm start
+
 # En otra terminal:
 node qa/capture.js
 ```
@@ -123,16 +125,8 @@ node qa/capture.js
 - [x] Demo + laboratorio del Módulo 3 (selector de herramientas)
 - [x] Demo + laboratorio del Módulo 4 (árbol de planificación)
 - [x] Referencias finales del Módulo 5
-- [x] Llamadas reales a una API — el laboratorio del Módulo 3 puede usar
-      Groq mediante API key personal (opt-in, ver [`docs/API_SETUP.md`](docs/API_SETUP.md))
+- [x] Llamadas reales a una API — el laboratorio del Módulo 3 puede usar Groq mediante API key personal (opt-in, ver [`docs/API_SETUP.md`](docs/API_SETUP.md))
 - [x] Interfaz bilingüe ES/EN con selector persistente en el navegador
-- [ ] Añadir la URL pública de la web cuando esté desplegada
-
-
-## Licencia
-
-MIT — ver [LICENSE](LICENSE). Sustituye el nombre del titular del copyright antes de publicar el repositorio.
-
-
+- [x] Desplegar la web y documentar la URL pública en Cloudflare Workers
 
 
