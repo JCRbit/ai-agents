@@ -1,0 +1,11 @@
+{
+  "name": "agentes-ia-bucles-de-decision",
+  "version": "1.0.0",
+  "description": "Introducción a Agentes de IA: bucles de decisión autónomos y razonamiento independiente — proyecto educativo interactivo, sin build step.",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve site -l 8000",
+    "dev": "python3 -m http.server 8000 --directory site"
+  },
+  "license": "MIT"
+}
