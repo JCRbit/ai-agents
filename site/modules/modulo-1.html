@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Módulo 1 · Fundamentos — Agentes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="../index.html">Inicio</a>
+      <a href="modulo-1.html">01 Fundamentos</a>
+      <a href="modulo-2.html">02 ReAct</a>
+      <a href="modulo-3.html">03 Herramientas</a>
+      <a href="modulo-4.html">04 Memoria</a>
+      <a href="modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+
+    <header class="module-header">
+      <p class="breadcrumb"><a href="../index.html">Inicio</a> / Módulo 01</p>
+      <h1><span class="module-header__index">01 ·</span> Fundamentos: de completar texto a tomar decisiones</h1>
+      <p class="lede prose">Qué aporta un modelo de lenguaje y qué añade el sistema que lo rodea para seleccionar acciones, usar herramientas y perseguir un objetivo en varios pasos.</p>
+    </header>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="teoria">Teoría</h2>
+
+      <div class="theory-block prose">
+        <h3 id="que-hace-realmente-un-llm">Qué hace realmente un LLM</h3>
+        <p>Un LLM procesa el contexto de entrada y genera una salida token a token, estimando qué token producir a continuación. Puede resolver tareas que requieren varios pasos, pero eso no implica que tenga intención o comprensión humana. Su salida puede incluir explicaciones útiles, aunque una explicación generada no garantiza que el proceso descrito sea completo, fiel ni correcto.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="de-la-funcion-al-bucle">De la función al bucle</h3>
+        <p>Como simplificación didáctica, podemos representar una llamada como <code>entrada → modelo → salida</code>. Un sistema agente añade un ciclo de control: mantiene el estado de la tarea, solicita al modelo una decisión, ejecuta una herramienta si procede, incorpora la observación resultante y determina si debe continuar o detenerse. La lógica exacta varía entre sistemas; el control puede combinar decisiones del modelo con reglas programadas, límites y validaciones externas.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="workflow-determinista-vs-agente">Workflow determinista vs agente</h3>
+        <p>En un <strong>workflow</strong>, el orden de los pasos está definido en gran medida de antemano. En un <strong>sistema agente</strong>, al menos algunas decisiones sobre el siguiente paso se toman durante la ejecución según el estado y las observaciones. No es una frontera absoluta: muchos sistemas combinan flujos definidos, decisiones del modelo y reglas de control.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="los-cuatro-componentes-minimos-de-un-agente">Los cuatro componentes mínimos de un agente</h3>
+        <p><strong>Componentes frecuentes:</strong> modelo · instrucciones y objetivo · estado/contexto · herramientas · bucle de control · criterios de evaluación y parada. La memoria persistente es útil en algunos agentes, pero no es obligatoria en todos.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="grados-de-autonomia">Grados de autonomía</h3>
+        <p>La autonomía es gradual y depende de las tareas, herramientas y permisos disponibles. Un sistema puede limitarse a recomendar, pedir aprobación antes de actuar o ejecutar automáticamente ciertas acciones de bajo riesgo. Más autonomía no significa más fiabilidad: conviene definir permisos, límites, validaciones y puntos de intervención humana.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="demo-una-llamada-vs-un-bucle">Demo · Una llamada vs un bucle</h2>
+      <p class="prose">Comparación en vivo: la misma pregunta resuelta con una única llamada a la API frente a un bucle de tres iteraciones.</p>
+      <div class="widget-shell" id="demo-root">
+        <span class="widget-shell__label">demo pendiente de implementar</span>
+        <p>Aquí irá el panel comparativo: 1 llamada (contador de tokens) vs bucle de 3 pasos (estado creciendo en cada vuelta). Ver guion-agentes-ia.md, Módulo 1.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="laboratorio-guiado">Laboratorio guiado</h2>
+      <p class="prose"><strong>Enunciado:</strong> «¿Cuál es la capital del país con más habitantes de Sudamérica y qué temperatura hace ahí ahora?»</p>
+      <div class="widget-shell" id="lab-root">
+        <span class="widget-shell__label">laboratorio pendiente de implementar</span>
+        <p>El usuario prueba primero sin herramientas (falla o alucina el dato de temperatura), luego activa el "modo agente" y ve el bucle resolverlo en pasos.</p>
+      </div>
+    </section>
+
+    <section class="module-section case-study" aria-labelledby="caso-transversal">
+      <p class="section-kicker">Caso práctico transversal · Paso 1 de 5</p>
+      <h2 id="caso-transversal">Una incidencia: investigar una aplicación caída</h2>
+      <p class="prose">Seguimos el mismo caso a lo largo del tutorial. El agente debe investigar una incidencia, utilizar herramientas con cuidado y verificar el resultado antes de detenerse.</p>
+      <div class="case-study__panel">
+        <span class="case-study__step">ETAPA 01 / 05</span>
+        <h3>Definir el objetivo</h3>
+        <p>Investigar por qué una aplicación no responde y proponer una causa respaldada por evidencias.</p>
+        <div class="case-study__lesson"><strong>Qué aprender:</strong> El agente separa el objetivo de una suposición: no debe afirmar que está resuelto hasta verificarlo.</div>
+        <a class="case-study__next" href="modulo-2.html">Siguiente: observar el bucle ReAct →</a>
+      </div>
+      <p class="case-study__note">Escenario didáctico simulado; no se conecta a servicios reales ni modifica sistemas externos.</p>
+    </section>
+
+    <nav class="module-nav">
+      <a aria-disabled="true">← Anterior</a>
+      <a href="modulo-2.html">Módulo 02 · El bucle ReAct →</a>
+    </nav>
+
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Módulo 01 de 05</span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/toc.js"></script>
+<script src="../assets/js/modules/module-1.js"></script>
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>
