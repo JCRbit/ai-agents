@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Módulo 4 · Memoria y criterio de parada — Agentes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="../index.html">Inicio</a>
+      <a href="modulo-1.html">01 Fundamentos</a>
+      <a href="modulo-2.html">02 ReAct</a>
+      <a href="modulo-3.html">03 Herramientas</a>
+      <a href="modulo-4.html">04 Memoria</a>
+      <a href="modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+
+    <header class="module-header">
+      <p class="breadcrumb"><a href="../index.html">Inicio</a> / Módulo 04</p>
+      <h1><span class="module-header__index">04 ·</span> Memoria, planificación y criterio de parada</h1>
+      <p class="lede prose">Qué recuerda un agente entre pasos, cómo descompone una tarea compleja, y por qué saber cuándo parar es la pieza de seguridad más importante.</p>
+    </header>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="teoria">Teoría</h2>
+
+      <div class="theory-block prose">
+        <h3 id="memoria-de-corto-plazo-vs-largo-plazo">Memoria de corto plazo vs largo plazo</h3>
+        <p>El <strong>contexto de trabajo</strong> reúne la información disponible durante una ejecución y está limitado por la ventana de contexto; las trazas más largas pueden aumentar el consumo y exigir selección o resumen. La <strong>memoria persistente</strong> conserva información entre ejecuciones mediante algún mecanismo de almacenamiento, como una base de datos o archivos. <strong>RAG</strong> es una técnica para recuperar información externa y añadirla al contexto, y puede usar una base vectorial, pero no es sinónimo de memoria a largo plazo ni es obligatoria en todos los sistemas.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="planificacion-y-descomposicion-de-tareas">Planificación y descomposición de tareas</h3>
+        <p>Para algunas tareas complejas, generar un plan o descomponer el objetivo en subtareas puede mejorar la organización y facilitar la supervisión. No siempre es mejor planificarlo todo por adelantado: cuando el entorno cambia, un plan rígido puede quedar obsoleto. Los sistemas pueden alternar planificación, ejecución y revisión según las observaciones.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="el-problema-del-criterio-de-parada">El problema del criterio de parada</h3>
+        <p>La finalización debe definirse con criterios observables, por ejemplo, una condición de éxito verificada, una respuesta terminal válida o la necesidad de intervención humana. La señal del modelo puede formar parte de la decisión, pero no basta en todos los casos: el agente puede declarar éxito prematuramente, repetir acciones o no progresar. Conviene combinar evaluación del resultado con límites externos.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="salvaguardas-de-produccion">Salvaguardas de producción</h3>
+        <p><code>max_iterations</code>, timeouts, presupuesto máximo de tokens o coste por tarea, y human-in-the-loop en los puntos de mayor riesgo.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="demo-arbol-de-planificacion-con-limite-de-iteraciones">Demo · Árbol de planificación con límite de iteraciones</h2>
+      <p class="prose">Un objetivo se descompone en subtareas que se completan en tiempo real, junto a una barra de "iteraciones usadas / máximo permitido".</p>
+      <div class="widget-shell" id="demo-root">
+        <span class="widget-shell__label">demo pendiente de implementar</span>
+        <p>Ver guion-agentes-ia.md, Módulo 4.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="laboratorio-guiado">Laboratorio guiado</h2>
+      <p class="prose"><strong>Enunciado:</strong> «organiza esta lista de 5 datos en una tabla y saca una conclusión», con límite de iteraciones ajustable por el usuario.</p>
+      <div class="widget-shell" id="lab-root">
+        <span class="widget-shell__label">laboratorio pendiente de implementar</span>
+        <p>Si el límite se fija demasiado bajo, el agente se corta a mitad de tarea con un mensaje explicativo.</p>
+      </div>
+    </section>
+
+    <section class="module-section case-study" aria-labelledby="caso-transversal">
+      <p class="section-kicker">Caso práctico transversal · Paso 4 de 5</p>
+      <h2 id="caso-transversal">Una incidencia: investigar una aplicación caída</h2>
+      <p class="prose">Seguimos el mismo caso a lo largo del tutorial. El agente debe investigar una incidencia, utilizar herramientas con cuidado y verificar el resultado antes de detenerse.</p>
+      <div class="case-study__panel">
+        <span class="case-study__step">ETAPA 04 / 05</span>
+        <h3>Adaptar el plan y verificar</h3>
+        <p>Con los registros encuentra un límite de conexiones. Tras aplicar una corrección autorizada en el entorno simulado, vuelve a comprobar el estado.</p>
+        <div class="case-study__lesson"><strong>Qué aprender:</strong> La acción no equivale a éxito. La verificación externa determina si el objetivo se ha cumplido; si no, el bucle continúa o pide ayuda.</div>
+        <a class="case-study__next" href="modulo-5.html">Siguiente: panorama y conclusiones →</a>
+      </div>
+      <p class="case-study__note">Escenario didáctico simulado; no se conecta a servicios reales ni modifica sistemas externos.</p>
+    </section>
+
+    <nav class="module-nav">
+      <a href="modulo-3.html">← Módulo 03 · Herramientas</a>
+      <a href="modulo-5.html">Módulo 05 · Panorama →</a>
+    </nav>
+
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Módulo 04 de 05</span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/toc.js"></script>
+<script src="../assets/js/modules/module-4.js"></script>
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>

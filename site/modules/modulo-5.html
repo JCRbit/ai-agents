@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Módulo 5 · Panorama de la industria — Agentes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="../index.html">Inicio</a>
+      <a href="modulo-1.html">01 Fundamentos</a>
+      <a href="modulo-2.html">02 ReAct</a>
+      <a href="modulo-3.html">03 Herramientas</a>
+      <a href="modulo-4.html">04 Memoria</a>
+      <a href="modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+
+    <header class="module-header">
+      <p class="breadcrumb"><a href="../index.html">Inicio</a> / Módulo 05</p>
+      <h1><span class="module-header__index">05 ·</span> Panorama de la industria</h1>
+      <p class="lede prose">Dónde encajan los frameworks reales, y qué lecciones históricas existen sobre autonomía sin control.</p>
+    </header>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="teoria">Teoría</h2>
+
+      <div class="theory-block prose">
+        <h3 id="frameworks-reales">Frameworks reales</h3>
+        <p>LangChain / LangGraph como orquestadores populares para construir bucles de agentes; el Claude Agent SDK como ejemplo de SDK oficial pensado específicamente para este patrón. La propia Anthropic formalizó la distinción entre <em>workflow</em> y <em>agente</em> que abrió el Módulo 1 en un artículo de ingeniería de referencia — primer enlace de la lista de abajo.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="autogpt-como-caso-historico">AutoGPT como caso histórico</h3>
+        <p>Uno de los primeros intentos populares (2023) de "agente totalmente autónomo", sin un criterio de parada robusto ni supervisión — un buen ejemplo real de por qué el Módulo 4 importa tanto en la práctica.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="multi-agente">Multi-agente</h3>
+        <p>Cuándo tiene sentido dividir el trabajo entre varios agentes especializados que se coordinan (uno planifica, otro ejecuta, otro revisa) en lugar de un único agente generalista.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="para-seguir-explorando">Para seguir explorando</h2>
+      <p class="prose">Este módulo de cierre no incluye demo ni laboratorio — son las referencias para quien quiera seguir después del tutorial.</p>
+
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">Building Effective Agents</a>
+          <span class="reference-domain">anthropic.com · artículo de ingeniería</span>
+          <p>El propio artículo de Anthropic que formaliza la distinción entre workflow (pasos fijados de antemano) y agente (el modelo decide el siguiente paso) — la idea que abre el Módulo 1 de este tutorial.</p>
+        </li>
+        <li class="reference-item">
+          <a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener">LangGraph — Overview</a>
+          <span class="reference-domain">docs.langchain.com · documentación oficial</span>
+          <p>Framework de orquestación que modela un agente como un grafo con estado: nodos, transiciones condicionales y puntos de persistencia para pausar y reanudar.</p>
+        </li>
+        <li class="reference-item">
+          <a href="https://platform.claude.com/docs/en/agent-sdk/overview" target="_blank" rel="noopener">Claude Agent SDK — Overview</a>
+          <span class="reference-domain">platform.claude.com · documentación oficial</span>
+          <p>El SDK con el que Anthropic construye Claude Code: mismo bucle de agente, herramientas y gestión de contexto, expuesto como librería para Python y TypeScript.</p>
+        </li>
+        <li class="reference-item">
+          <a href="https://en.wikipedia.org/wiki/AutoGPT" target="_blank" rel="noopener">AutoGPT</a>
+          <span class="reference-domain">en.wikipedia.org · resumen histórico</span>
+          <p>Contexto del caso citado en el Módulo 4: por qué un agente sin criterio de parada robusto cae en bucles infinitos, y cómo evolucionó el proyecto después de 2023.</p>
+        </li>
+      </ul>
+    </section>
+
+
+    <section class="module-section case-study" aria-labelledby="caso-transversal">
+      <p class="section-kicker">Caso práctico transversal · Paso 5 de 5</p>
+      <h2 id="caso-transversal">Una incidencia: investigar una aplicación caída</h2>
+      <p class="prose">Seguimos el mismo caso a lo largo del tutorial. El agente debe investigar una incidencia, utilizar herramientas con cuidado y verificar el resultado antes de detenerse.</p>
+      <div class="case-study__panel">
+        <span class="case-study__step">ETAPA 05 / 05</span>
+        <h3>Extraer la lección</h3>
+        <p>El servicio responde correctamente después de la corrección y una comprobación final confirma el resultado.</p>
+        <div class="case-study__lesson"><strong>Qué aprender:</strong> El agente se detiene porque se cumple un criterio observable, no simplemente porque el modelo haya dicho «terminado».</div>
+        <a class="case-study__next" href="../index.html">Volver al inicio →</a>
+      </div>
+      <p class="case-study__note">Escenario didáctico simulado; no se conecta a servicios reales ni modifica sistemas externos.</p>
+    </section>
+
+    <nav class="module-nav">
+      <a href="modulo-4.html">← Módulo 04 · Memoria</a>
+      <a aria-disabled="true">Fin</a>
+    </nav>
+
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Módulo 05 de 05 · Bonus</span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/toc.js"></script>
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>

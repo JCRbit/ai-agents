@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Introducción a Agentes de IA — Bucles de decisión autónomos</title>
+<meta name="description" content="Un tutorial práctico sobre cómo un LLM pasa de responder a decidir: bucles de razonamiento, herramientas, memoria y planificación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="index.html">Inicio</a>
+      <a href="modules/modulo-1.html">01 Fundamentos</a>
+      <a href="modules/modulo-2.html">02 ReAct</a>
+      <a href="modules/modulo-3.html">03 Herramientas</a>
+      <a href="modules/modulo-4.html">04 Memoria</a>
+      <a href="modules/modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+    <section class="hero">
+      <div>
+        <p class="hero__eyebrow">introducción a agentes de ia</p>
+        <h1>Un LLM genera respuestas.<br>Un agente ejecuta un bucle.</h1>
+        <p class="lede">Cinco módulos prácticos para entender cómo un sistema basado en un modelo de lenguaje puede perseguir objetivos en varios pasos: interpreta el contexto, propone acciones, usa herramientas y evalúa resultados bajo límites definidos.</p>
+        <a class="hero__cta" href="modules/modulo-1.html">Empezar por el Módulo 1 →</a>
+      </div>
+
+      <div>
+        <figure class="loop-figure">
+        <svg class="loop-diagram" viewBox="0 0 460 340" role="img" aria-labelledby="loopDiagramTitle loopDiagramDesc">
+          <title id="loopDiagramTitle">De una llamada única al bucle de decisión de un agente</title>
+          <desc id="loopDiagramDesc">Arriba, una entrada pasa por un modelo y produce una salida. Abajo, el sistema percibe el contexto, razona y decide, actúa y evalúa el resultado. Si el objetivo no se cumple, vuelve a decidir; si se cumple o alcanza un límite, finaliza.</desc>
+          <defs>
+            <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"></path></marker>
+          </defs>
+          <text x="10" y="20" class="label-muted" font-size="12">LLAMADA ÚNICA · UNA PASADA</text>
+          <rect x="10" y="32" width="104" height="38" rx="4" class="box"></rect>
+          <text x="62" y="55" text-anchor="middle" font-size="12">Entrada</text>
+          <path d="M118 51 H165" class="arrow" marker-end="url(#arrowHead)"></path>
+          <rect x="170" y="32" width="100" height="38" rx="4" class="box"></rect>
+          <text x="220" y="55" text-anchor="middle" font-size="12">Modelo</text>
+          <path d="M274 51 H321" class="arrow" marker-end="url(#arrowHead)"></path>
+          <rect x="326" y="32" width="124" height="38" rx="4" class="box"></rect>
+          <text x="388" y="55" text-anchor="middle" font-size="12">Salida</text>
+
+          <path d="M10 91 H450" class="separator"></path>
+          <text x="10" y="113" class="label-muted" font-size="12">SISTEMA AGENTE · BUCLE DE CONTROL</text>
+
+          <rect x="12" y="135" width="132" height="48" rx="4" class="box box--active"></rect>
+          <text x="78" y="155" text-anchor="middle" font-size="12">1 · Percibir</text>
+          <text x="78" y="171" text-anchor="middle" font-size="10" class="label-muted">contexto / estado</text>
+
+          <rect x="166" y="135" width="132" height="48" rx="4" class="box"></rect>
+          <text x="232" y="155" text-anchor="middle" font-size="12">2 · Decidir</text>
+          <text x="232" y="171" text-anchor="middle" font-size="10" class="label-muted">razonar / planificar</text>
+
+          <rect x="320" y="135" width="130" height="48" rx="4" class="box"></rect>
+          <text x="385" y="155" text-anchor="middle" font-size="12">3 · Actuar</text>
+          <text x="385" y="171" text-anchor="middle" font-size="10" class="label-muted">herramienta / acción</text>
+
+          <path d="M146 159 H161" class="loop-path" marker-end="url(#arrowHead)"></path>
+          <path d="M300 159 H315" class="loop-path" marker-end="url(#arrowHead)"></path>
+
+          <rect x="166" y="222" width="132" height="48" rx="4" class="box box--evaluation"></rect>
+          <text x="232" y="242" text-anchor="middle" font-size="12">4 · Evaluar</text>
+          <text x="232" y="258" text-anchor="middle" font-size="10" class="label-muted">¿qué ha cambiado?</text>
+          <path d="M385 187 V201 H298 V218" class="loop-path" marker-end="url(#arrowHead)"></path>
+
+          <path d="M166 246 H78 V187" class="loop-path" marker-end="url(#arrowHead)"></path>
+          <text x="87" y="236" class="label-muted" font-size="10">no resuelto</text>
+
+          <rect x="320" y="222" width="130" height="48" rx="4" class="box box--stop"></rect>
+          <text x="385" y="242" text-anchor="middle" font-size="12">Parar</text>
+          <text x="385" y="258" text-anchor="middle" font-size="10" class="label-muted">éxito o límite</text>
+          <path d="M300 246 H315" class="loop-path" marker-end="url(#arrowHead)"></path>
+          <text x="305" y="210" class="label-muted" font-size="10">resuelto</text>
+
+          <path d="M12 289 H450" class="separator"></path>
+          <text x="230" y="313" text-anchor="middle" font-size="11" class="label-muted">El resultado actualiza el estado y condiciona la siguiente decisión.</text>
+          <path d="M12 159 C2 159 2 246 12 246" class="loop-pulse"></path>
+          <path d="M166 246 H78 V187" class="loop-pulse"></path>
+        </svg>
+        <figcaption class="loop-figure__caption">El modelo propone; el sistema agente coordina las acciones, incorpora observaciones y decide si continúa o termina.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="path">
+      <div class="path__intro prose">
+        <h2 id="ruta-de-aprendizaje">Ruta de aprendizaje</h2>
+        <p>Cada módulo sigue la misma estructura: teoría desde cero, una demo visual del concepto en acción, y un laboratorio guiado para probarlo tú mismo.</p>
+      </div>
+
+      <ol class="path-list">
+        <li class="path-item">
+          <span class="path-item__index">01</span>
+          <div>
+            <h3 class="path-item__title"><a href="modules/modulo-1.html">Fundamentos: de completar texto a tomar decisiones</a></h3>
+            <p class="path-item__summary">La diferencia entre una función pura y un bucle con estado, y los cuatro componentes mínimos de un agente.</p>
+            <p class="path-item__parts"><span>Teoría</span><span>Demo: una llamada vs un bucle</span><span>Lab guiado</span></p>
+          </div>
+        </li>
+
+        <li class="path-item">
+          <span class="path-item__index">02</span>
+          <div>
+            <h3 class="path-item__title"><a href="modules/modulo-2.html">El bucle ReAct: razonar y actuar</a></h3>
+            <p class="path-item__summary">El patrón Thought / Action / Observation, cómo se intercalan acciones y observaciones, y qué puede y qué no puede garantizar una traza de razonamiento.</p>
+            <p class="path-item__parts"><span>Teoría</span><span>Demo: traza en vivo</span><span>Lab guiado</span></p>
+          </div>
+        </li>
+
+        <li class="path-item">
+          <span class="path-item__index">03</span>
+          <div>
+            <h3 class="path-item__title"><a href="modules/modulo-3.html">Herramientas: cómo decide el modelo</a></h3>
+            <p class="path-item__summary">Tool schemas, function calling y por qué la descripción de una herramienta importa más que su implementación.</p>
+            <p class="path-item__parts"><span>Teoría</span><span>Demo: selector de herramientas</span><span>Lab guiado</span></p>
+          </div>
+        </li>
+
+        <li class="path-item">
+          <span class="path-item__index">04</span>
+          <div>
+            <h3 class="path-item__title"><a href="modules/modulo-4.html">Memoria, planificación y criterio de parada</a></h3>
+            <p class="path-item__summary">Memoria de corto y largo plazo, descomposición de tareas, y por qué el criterio de parada es la pieza de seguridad más importante.</p>
+            <p class="path-item__parts"><span>Teoría</span><span>Demo: árbol de planificación</span><span>Lab guiado</span></p>
+          </div>
+        </li>
+
+        <li class="path-item path-item--bonus">
+          <span class="path-item__index">05</span>
+          <div>
+            <h3 class="path-item__title"><a href="modules/modulo-5.html">Panorama de industria</a></h3>
+            <p class="path-item__summary">Frameworks reales, el caso histórico de AutoGPT, y cuándo tiene sentido pasar a un sistema multi-agente.</p>
+            <p class="path-item__parts"><span>Teoría</span><span>Referencias para seguir explorando</span></p>
+          </div>
+        </li>
+      </ol>
+    </section>
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Bucles de decisión autónomos y razonamiento independiente</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/toc.js"></script>
+<script src="assets/js/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Módulo 3 · Herramientas — Agentes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="../index.html">Inicio</a>
+      <a href="modulo-1.html">01 Fundamentos</a>
+      <a href="modulo-2.html">02 ReAct</a>
+      <a href="modulo-3.html">03 Herramientas</a>
+      <a href="modulo-4.html">04 Memoria</a>
+      <a href="modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+
+    <header class="module-header">
+      <p class="breadcrumb"><a href="../index.html">Inicio</a> / Módulo 03</p>
+      <h1><span class="module-header__index">03 ·</span> Herramientas: cómo decide el modelo</h1>
+      <p class="lede prose">Tool schemas, function calling, y por qué la descripción de una herramienta pesa más que su implementación.</p>
+    </header>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="teoria">Teoría</h2>
+
+      <div class="theory-block prose">
+        <h3 id="que-es-un-tool-schema">Qué es un tool schema</h3>
+        <p>Una herramienta se define con un nombre, una <strong>descripción</strong> en lenguaje natural — la parte que más influye en si el modelo la elige bien — y sus parámetros de entrada, normalmente como JSON Schema.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="la-mecanica-real-del-function-calling">La mecánica real del function calling</h3>
+        <p>El modelo no ejecuta la herramienta. Devuelve una estructura pidiendo llamarla con ciertos argumentos; el código de la aplicación la ejecuta de verdad y le devuelve el resultado como una nueva Observation. El modelo nunca toca el mundo exterior directamente.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="como-decide-el-modelo-que-herramienta-usar">Cómo "decide" el modelo qué herramienta usar</h3>
+        <p>No hay un enrutador explícito. Dado el conjunto de herramientas disponibles y el historial, el modelo genera la salida más probable. Una descripción ambigua produce elecciones erróneas aunque la función esté bien programada; con muchas herramientas parecidas, la tasa de acierto baja.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="cuando-una-herramienta-falla">Cuando una herramienta falla</h3>
+        <p>El error se devuelve al modelo como una Observation de error. El modelo puede razonar sobre ello y decidir reintentar, usar una alternativa, o informar de que no pudo completar la tarea.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="demo-que-herramienta-elige-el-modelo">Demo · ¿Qué herramienta elige el modelo?</h2>
+      <p class="prose">Cuatro herramientas ficticias visibles con su descripción; al escribir una pregunta, se resalta la elegida junto con el fragmento de razonamiento que la justificó.</p>
+      <div class="widget-shell" id="demo-root">
+        <span class="widget-shell__label">demo pendiente de implementar</span>
+        <p>Ver guion-agentes-ia.md, Módulo 3.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="laboratorio-guiado">Laboratorio guiado</h2>
+      <p class="prose"><strong>Reto:</strong> encontrar una pregunta ambigua que haga que el modelo elija mal una herramienta, y reescribirla para corregir la elección.</p>
+      <div class="widget-shell" id="lab-root">
+        <span class="widget-shell__label">laboratorio pendiente de implementar</span>
+        <p>El usuario prueba libremente preguntas contra el agente con las herramientas simuladas.</p>
+      </div>
+    </section>
+
+    <section class="module-section case-study" aria-labelledby="caso-transversal">
+      <p class="section-kicker">Caso práctico transversal · Paso 3 de 5</p>
+      <h2 id="caso-transversal">Una incidencia: investigar una aplicación caída</h2>
+      <p class="prose">Seguimos el mismo caso a lo largo del tutorial. El agente debe investigar una incidencia, utilizar herramientas con cuidado y verificar el resultado antes de detenerse.</p>
+      <div class="case-study__panel">
+        <span class="case-study__step">ETAPA 03 / 05</span>
+        <h3>Elegir y ejecutar una herramienta</h3>
+        <p>Selecciona una herramienta de consulta de registros. La primera llamada falla porque falta un parámetro obligatorio.</p>
+        <div class="case-study__lesson"><strong>Qué aprender:</strong> El modelo solicita la herramienta; el programa la ejecuta y devuelve el error como observación. El agente puede corregir los argumentos o probar una alternativa.</div>
+        <a class="case-study__next" href="modulo-4.html">Siguiente: revisar el plan y los límites →</a>
+      </div>
+      <p class="case-study__note">Escenario didáctico simulado; no se conecta a servicios reales ni modifica sistemas externos.</p>
+    </section>
+
+    <nav class="module-nav">
+      <a href="modulo-2.html">← Módulo 02 · El bucle ReAct</a>
+      <a href="modulo-4.html">Módulo 04 · Memoria →</a>
+    </nav>
+
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Módulo 03 de 05</span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/toc.js"></script>
+<script src="../assets/js/modules/module-3.js"></script>
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>

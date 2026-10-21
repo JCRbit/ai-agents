@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Módulo 2 · El bucle ReAct — Agentes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%94%81</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="site-header__title">Agentes de <span>IA</span></span>
+    <nav class="site-nav" aria-label="Módulos del tutorial">
+      <a href="../index.html">Inicio</a>
+      <a href="modulo-1.html">01 Fundamentos</a>
+      <a href="modulo-2.html">02 ReAct</a>
+      <a href="modulo-3.html">03 Herramientas</a>
+      <a href="modulo-4.html">04 Memoria</a>
+      <a href="modulo-5.html">05 Panorama</a>
+    </nav>
+    <button class="language-toggle" type="button" data-i18n-language-toggle aria-label="Cambiar a inglés" title="Cambiar a inglés">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="page has-toc">
+    <div class="page-content">
+
+    <header class="module-header">
+      <p class="breadcrumb"><a href="../index.html">Inicio</a> / Módulo 02</p>
+      <h1><span class="module-header__index">02 ·</span> El bucle ReAct: razonar y actuar</h1>
+      <p class="lede prose">Cómo ReAct intercala razonamiento expresado, acciones y observaciones, y qué aporta este patrón —sin garantizar por sí solo decisiones correctas.</p>
+    </header>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="teoria">Teoría</h2>
+
+      <div class="theory-block prose">
+        <h3 id="de-chain-of-thought-a-react">De chain-of-thought a ReAct</h3>
+        <p>Chain-of-thought es una familia de técnicas que solicita pasos intermedios o razonamiento expresado. Puede ayudar en determinadas tareas, pero no garantiza una mayor precisión y el texto generado no siempre refleja fielmente los procesos internos del modelo. ReAct (Reasoning and Acting) combina razonamiento expresado con acciones y observaciones del entorno, de modo que el siguiente paso puede apoyarse en información obtenida durante la ejecución.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="el-formato-clasico">El formato clásico</h3>
+        <pre class="mono" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:1.25rem;overflow-x:auto;">Thought: necesito saber X para responder
+Action: buscar_web("X")
+Observation: [resultado de la búsqueda]
+Thought: con este dato ya puedo calcular Y
+Action: calculadora("Y")
+Observation: [resultado]
+Thought: ya tengo todo lo necesario
+Final Answer: [respuesta compuesta]</pre>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="por-que-funciona-mejor-que-actuar-directamente">Por qué funciona mejor que actuar directamente</h3>
+        <p>Una traza legible puede ayudar a inspeccionar qué información usó el sistema y qué acción intentó realizar. Sin embargo, explicar un plan no obliga a que sea correcto, ni una traza visible revela necesariamente todo el procesamiento interno. Para depurar con rigor, conviene registrar también las entradas y salidas de herramientas, errores, estado y resultados verificados.</p>
+      </div>
+
+      <div class="theory-block prose">
+        <h3 id="la-traza-como-unidad-de-trabajo">La traza como unidad de trabajo</h3>
+        <p>Una traza es el registro de los pasos de una ejecución: decisiones o mensajes relevantes, llamadas a herramientas, observaciones, errores y resultado final. Su contenido depende del sistema; no siempre incluye razonamiento privado ni debe asumirse que todo texto explicativo sea una descripción fiel del proceso interno. Las trazas ayudan a depurar y evaluar, respetando la privacidad y los datos sensibles.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="demo-traza-react-en-vivo">Demo · Traza ReAct en vivo</h2>
+      <p class="prose">Interfaz tipo terminal donde cada bloque (Thought, Action, Observation, Final Answer) aparece animado y coloreado por tipo.</p>
+      <div class="widget-shell" id="demo-root">
+        <span class="widget-shell__label">demo pendiente de implementar</span>
+        <p>Ver guion-agentes-ia.md, Módulo 2, para el detalle de la animación paso a paso.</p>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-kicker" id="laboratorio-guiado">Laboratorio guiado</h2>
+      <p class="prose"><strong>Enunciado:</strong> una pregunta que combina un dato que hay que buscar con un cálculo posterior (p. ej. días hasta una fecha límite).</p>
+      <div class="widget-shell" id="lab-root">
+        <span class="widget-shell__label">laboratorio pendiente de implementar</span>
+        <p>El usuario ve la traza completa generarse en vivo y puede reformular la pregunta para observar cómo cambia el razonamiento.</p>
+      </div>
+    </section>
+
+    <section class="module-section case-study" aria-labelledby="caso-transversal">
+      <p class="section-kicker">Caso práctico transversal · Paso 2 de 5</p>
+      <h2 id="caso-transversal">Una incidencia: investigar una aplicación caída</h2>
+      <p class="prose">Seguimos el mismo caso a lo largo del tutorial. El agente debe investigar una incidencia, utilizar herramientas con cuidado y verificar el resultado antes de detenerse.</p>
+      <div class="case-study__panel">
+        <span class="case-study__step">ETAPA 02 / 05</span>
+        <h3>Observar y revisar hipótesis</h3>
+        <p>El agente consulta el estado del servicio y observa que la aplicación devuelve un error 503.</p>
+        <div class="case-study__lesson"><strong>Qué aprender:</strong> La observación cambia el contexto. En lugar de inventar una causa, el agente decide qué comprobar a continuación.</div>
+        <a class="case-study__next" href="modulo-3.html">Siguiente: elegir una herramienta →</a>
+      </div>
+      <p class="case-study__note">Escenario didáctico simulado; no se conecta a servicios reales ni modifica sistemas externos.</p>
+    </section>
+
+    <nav class="module-nav">
+      <a href="modulo-1.html">← Módulo 01 · Fundamentos</a>
+      <a href="modulo-3.html">Módulo 03 · Herramientas →</a>
+    </nav>
+
+    </div>
+    <nav class="page-toc" aria-label="Contenidos de la página">
+      <ul class="page-toc__list"></ul>
+    </nav>
+  
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="page">
+    <span>Introducción a Agentes de IA</span>
+    <span>Módulo 02 de 05</span>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/toc.js"></script>
+<script src="../assets/js/modules/module-2.js"></script>
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>
