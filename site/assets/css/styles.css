@@ -117,9 +117,6 @@ code, .mono {
    Site header / nav
    ========================================================================== */
 
-/* Prevent a Spanish-first paint while the saved language is being applied. */
-html:not(.i18n-ready) body { visibility: hidden; }
-
 .site-header {
   border-bottom: 1px solid var(--color-border);
   position: sticky;
